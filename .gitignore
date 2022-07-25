@@ -234,10 +234,6 @@ cython_debug/
 .ionide
 .idea
 __pycache__
-settings.py
-/config/settings.py
-/main/migrations
-/mobile/migrations
-/subscription/migrations
+#/config/settings.py
 
 # End of https://www.toptal.com/developers/gitignore/api/python,django,visualstudiocode
