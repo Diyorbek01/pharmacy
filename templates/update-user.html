@@ -110,28 +110,29 @@
                                         <div class="field item form-group">
                                             <label class="col-form-label col-md-3 col-sm-3  label-align">Ism<span class="required">*</span></label>
                                             <div class="col-md-6 col-sm-6">
-                                                <input class="form-control" name="name" placeholder="ex. Diyorbek Yuldashev" required="required" />
+                                                <input class="form-control" name="name" value="{{ users.full_name }}" placeholder="ex. Diyorbek Yuldashev" required="required" />
+                                                <input class="form-control" type="hidden" name="id" value="{{ users.username }}" placeholder="ex. Diyorbek Yuldashev" required="required" />
                                             </div>
                                         </div>
                                         <div class="field item form-group">
                                             <label class="col-form-label col-md-3 col-sm-3  label-align">Telefon raqam<span class="required"></span></label>
                                             <div class="col-md-6 col-sm-6">
-                                                <input class="form-control" class='optional' name="phone_number" data-validate-length-range="5,15" type="tel"/></div>
+                                                <input class="form-control" class='optional' name="phone_number" value="{{users.phone_number }}" data-validate-length-range="5,15" type="tel"/></div>
                                         </div>
 
 
                                         <div class="field item form-group">
 											<label class="col-form-label col-md-3 col-sm-3  label-align">Telegram ID<span class="required">*</span></label>
 											<div class="col-md-6 col-sm-6">
-												<input class="form-control" type="number" id="password1" name="tg_id"
+												<input class="form-control" type="number" value="{{ users.tg_id }}" id="password1" name="tg_id"
                                                        required />
 											</div>
 										</div>
                                         <div class="ln_solid">
                                             <div class="form-group">
                                                 <div class="col-md-6 offset-md-3">
-                                                    <button type='submit' class="btn btn-primary">Submit</button>
-                                                    <button type='reset' class="btn btn-success">Reset</button>
+                                                    <button type='submit' class="btn btn-primary">Saqlash</button>
+                                                    <a href="{% url 'deliverer-list' %}" class="btn btn-danger">Orqaga</a>
                                                 </div>
                                             </div>
                                         </div>

@@ -8,7 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Eltuvchilar</title>
+    <title>Mijozlar</title>
 
     <!-- Bootstrap -->
     <link href="cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
@@ -97,15 +97,9 @@
                     <div class="col-md-12 col-sm-12 ">
                         <div class="x_panel">
                             <div class="x_title">
-                                <h2>Eltuvchilar Ro'yxati</h2>
+                                <h2>Mijoz Joylashuvi</h2>
                                 <ul class="nav navbar-right panel_toolbox">
                                     <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                                    </li>
-                                    </li>
-                                    <li><a type="button" href="{% url 'create-user' %}"
-                                           class="ml-2 bg-primary text-light"><i class="fa fa-plus"
-                                                                                 aria-hidden="true"></i> Qo'shish</a>
-                                    </li>
                                     </li>
                                 </ul>
                                 <div class="clearfix"></div>
@@ -114,40 +108,7 @@
                                 <div class="row">
                                     <div class="col-sm-12">
                                         <div class="card-box table-responsive">
-
-                                            <table id="datatable-buttons" class="table table-striped table-bordered"
-                                                   style="width:100%">
-                                                <thead>
-                                                <tr>
-                                                    <th>T/R</th>
-                                                    <th>Ism</th>
-                                                    <th>Tel raqam</th>
-                                                    <th>Tg ID</th>
-                                                    <th>Yaratilgan sana</th>
-                                                    <th>Tahrirlash</th>
-                                                </tr>
-                                                </thead>
-                                                <tbody>
-                                                {% for user in users %}
-                                                    <tr>
-                                                    <td>{{ forloop.counter }}</td>
-                                                        <td>{{ user.full_name }}</td>
-                                                        <td>{{ user.phone_number }}</td>
-                                                        <td>{{ user.tg_id }}</td>
-                                                        <td>{{ user.created_at }}</td>
-                                                        <td class="text-center">
-                                                            <a href="/update-user/{{ user.username }}"
-                                                               class="btn btn-info"><i class="fa fa-pencil-square-o"
-                                                                                       aria-hidden="true"></i>
-                                                            </a><a href="/delete-user/{{ user.username }}" onclick="return confirm('Siz rostdan ham o\'chirmoqchimisiz?')"
-                                                                   class="btn btn-danger"><i class="fa fa-trash-o" aria-hidden="true"></i>
-
-                                                        </a>
-                                                        </td>
-                                                    </tr>
-                                                {% endfor %}
-                                                </tbody>
-                                            </table>
+                                            <div id="map" class="" style="width: 100%; height: 450px"></div>
                                         </div>
                                     </div>
                                 </div>
@@ -161,6 +122,35 @@
 
     </div>
 </div>
+
+<script src="https://api-maps.yandex.ru/2.1/?apikey=456787f4-294f-4b71-9233-05be8554dd23&lang=en_US"
+        type="text/javascript">
+</script>
+<script type="text/javascript">
+    ymaps.ready(function () {
+        var myMap = new ymaps.Map('map', {
+                center: [41.006809078683226, 71.66119206506757],
+                zoom: 11
+            }, {
+                searchControlProvider: 'yandex#search'
+            }),
+
+            // Создаём макет содержимого.
+            MyIconContentLayout = ymaps.templateLayoutFactory.createClass(
+                '<div style="color: #FFFFFF; font-weight: bold;">$[properties.iconContent]</div>'
+            ),
+
+            myPlacemark = new ymaps.Placemark([{{ lat }}, {{ long }}], {
+                hintContent: 'Собственный значок метки',
+                balloonContent: 'Это красивая метка'
+            });
+
+
+        myMap.geoObjects
+            .add(myPlacemark)
+    });
+</script>
+
 
 <!-- jQuery -->
 <script src="{% static '' %}vendors/jquery/dist/jquery.min.js"></script>
