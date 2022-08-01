@@ -8,7 +8,7 @@ from django.contrib.auth.decorators import login_required
 from .models import Deliverer
 from django.db.models import Q
 
-BOT_TOKEN = "1953421935:AAFz5c4S9r7bw-9T6cLpvH6MLc9BaqHC1nk"
+BOT_TOKEN = "1996819753:AAFRIWviAYPipVuEn9UtJgULADiHwCV5YiY"
 URL = f"https://api.telegram.org/file/bot{BOT_TOKEN}/"
 GET_PATH_URL = f"https://api.telegram.org/bot{BOT_TOKEN}/getFile?file_id="
 SEND_MESSAGE_URL = f"https://api.telegram.org/bot{BOT_TOKEN}/sendMessage?"
