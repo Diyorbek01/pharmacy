@@ -55,10 +55,9 @@ class UserView(viewsets.ModelViewSet):
     def post(self, request):
         user = request.data.get("user", None)
         order = request.data.get("order", None)
-        print(user, order)
+        print(request.data)
         if User.objects.filter(tg_id=user['tg_id']).exists():
             user_instance = User.objects.get(tg_id=user["tg_id"])
-            print(user_instance)
         else:
             user_instance = User.objects.create(
                 **user
@@ -66,10 +65,7 @@ class UserView(viewsets.ModelViewSet):
         file_id = order.get("image_file_id", None)
         text = order.get("text_recipies", None)
         status = Status.objects.all().first()
-        print(text, file_id)
         if file_id is not None:
-            print("image is not")
-
             url = f"{GET_PATH_URL}{file_id}"
             response = requests.request("GET", url)
             res = response.json()
@@ -80,7 +76,6 @@ class UserView(viewsets.ModelViewSet):
                 status=status
             )
         elif text is not None:
-            print("text is not")
             order_instance = Order.objects.create(
                 text_recipies=text,
                 user=user_instance,
