@@ -7,7 +7,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework import viewsets
 from rest_framework.decorators import action
 from rest_framework.response import Response
-from main.views import URL, GET_PATH_URL, send_message_deliverer
+from main.views import URL, GET_PATH_URL, send_message_deliverer, send_message
 
 
 class UserView(viewsets.ModelViewSet):
@@ -34,7 +34,7 @@ class UserView(viewsets.ModelViewSet):
         order_last = Status.objects.all().last()
         order.status_id = status_id
         order.save()
-        print(order_last.id, order.status_id)
+        send_message(status_id, order.user.tg_id)
         if int(order_last.id) != int(order.status_id):
             send_message_deliverer(order.status.id, order.id, order.deliverer.tg_id)
 
@@ -55,7 +55,6 @@ class UserView(viewsets.ModelViewSet):
     def post(self, request):
         user = request.data.get("user", None)
         order = request.data.get("order", None)
-        print(request.data)
         if User.objects.filter(tg_id=user['tg_id']).exists():
             user_instance = User.objects.get(tg_id=user["tg_id"])
         else:
@@ -69,7 +68,6 @@ class UserView(viewsets.ModelViewSet):
             url = f"{GET_PATH_URL}{file_id}"
             response = requests.request("GET", url)
             res = response.json()
-            print(res)
             file_path = res['result'].get("file_path", None)
             order_instance = Order.objects.create(
                 image_recipies=file_path,

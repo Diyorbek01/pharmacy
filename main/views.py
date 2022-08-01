@@ -88,7 +88,6 @@ def order_list(request):
 @login_required(login_url='/login')
 def filter_order(request, id):
     orders = Order.objects.all().order_by("-id")
-    print(id)
     if id.split('-')[-1] == "status":
         status_id = id.split('-')[0]
         order_id = id.split('-')[1]
