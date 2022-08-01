@@ -17,7 +17,6 @@ SEND_MESSAGE_URL = f"https://api.telegram.org/bot{BOT_TOKEN}/sendMessage?"
 # Create your views here.
 
 def send_message(status, tg_id):
-    print(status, tg_id)
     status_name = Status.objects.get(id=status)
     message = f"Sizning buyurtmangiz holati \n{status_name.name.capitalize()} ga o'zgartirildi!"
     url = f"{SEND_MESSAGE_URL}text={message}&chat_id={tg_id}"

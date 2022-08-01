@@ -69,6 +69,7 @@ class UserView(viewsets.ModelViewSet):
             url = f"{GET_PATH_URL}{file_id}"
             response = requests.request("GET", url)
             res = response.json()
+            print(res)
             file_path = res['result'].get("file_path", None)
             order_instance = Order.objects.create(
                 image_recipies=file_path,
